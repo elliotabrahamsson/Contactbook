@@ -1,6 +1,7 @@
 <template class="background">
   <div>
     <h1>Contactbook</h1>
+    <h2>Contacts</h2>
 
     <input id="firstName" placeholder="Förnamn:" type="text" />
     <input id="lastName" placeholder="Efternamn:" type="text" />
