@@ -14,4 +14,6 @@
   <div class="hidden"></div>
 </template>
 
-<script setup></script>
+<script setup>
+
+</script>
