@@ -40,31 +40,35 @@
     <button
       id="showAll"
       @click="getContact()"
-      class="rounded text-slate-200 bg-[#05768E] shadow-lg shadow-[#05768E]"
+      class="rounded text-slate-200 bg-[#05768E] shadow-lg shadow-[#05768E] mb-3"
     >
       Visa alla kontakter
     </button>
   </div>
 
-  <div id="contactsDiv" class="text-center" v-for="contact in contacts">
-    <p class="font-bold">
+  <div
+    id="contactsDiv"
+    class="text-center rounded border-2 border-[#05768E] w-96 ml-auto mr-auto mt-2 mb-2"
+    v-for="contact in contacts"
+  >
+    <p class="font-bold mt-2">
       {{ contact.name }}
     </p>
-    <p class="">
+    <p class="mt-2">
       {{ contact.phone }}
     </p>
-    <p>
+    <p class="mt-2">
       {{ contact.email }}
     </p>
     <button
       @click="delContact()"
-      class="rounded text-slate-200 bg-[#05768E] shadow-lg shadow-[#05768E]"
+      class="rounded text-slate-200 bg-[#05768E] shadow-lg shadow-[#05768E] mt-2"
     >
       Ta bort
     </button>
     <button
       @click="changeContact()"
-      class="rounded text-slate-200 bg-[#05768E] shadow-lg shadow-[#05768E] ml-2"
+      class="rounded text-slate-200 bg-[#05768E] shadow-lg shadow-[#05768E] ml-2 mb-3"
     >
       Ändra
     </button>
