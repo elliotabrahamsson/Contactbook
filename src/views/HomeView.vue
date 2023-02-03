@@ -2,15 +2,34 @@
   <div class="w-fit mx-auto grid grid-cols-1 gap-4">
     <h1 class="mx-1">Contactbook</h1>
 
-    <input id="firstName" placeholder="Förnamn:" type="text" class="rounded" />
-    <input id="lastName" placeholder="Efternamn:" type="text" class="rounded" />
+    <input
+      id="firstName"
+      placeholder="Förnamn:"
+      type="text"
+      v-model="firstname"
+      class="rounded"
+    />
+    <input
+      id="lastName"
+      placeholder="Efternamn:"
+      type="text"
+      v-model="lastname"
+      class="rounded"
+    />
     <input
       id="phone"
       placeholder="Telefonnummer:"
+      v-model="number"
       type="text"
       class="rounded"
     />
-    <input type="text" id="email" placeholder="Email:" class="rounded" />
+    <input
+      type="text"
+      id="email"
+      placeholder="Email:"
+      v-model="email"
+      class="rounded"
+    />
     <button
       id="add"
       @click="addContact()"
@@ -41,6 +60,10 @@ export default {
   data() {
     return {
       contacts: [],
+      firstname: "",
+      lastname: "",
+      number: "",
+      email: "",
     };
   },
   methods: {
@@ -54,7 +77,22 @@ export default {
       XHR.send();
     },
     addContact() {
-      console.log("added");
+      const XHR = new XMLHttpRequest();
+      let contact = {
+        name: `${this.firstname} ${this.lastname}`,
+        phone: this.number,
+        email: this.email,
+      };
+
+      const that = this;
+      XHR.onload = function () {
+        contact.id = JSON.parse(this.responseText).id;
+        that.contacts.push(contact);
+      };
+
+      XHR.open("POST", "https://contactsserver.onrender.com/contact");
+      XHR.setRequestHeader("Content-type", "application/json");
+      XHR.send(JSON.stringify(contact));
     },
   },
 };
