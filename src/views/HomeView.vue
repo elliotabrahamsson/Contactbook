@@ -46,23 +46,28 @@
     </button>
   </div>
 
-  <div
-    id="contactsDiv"
-    class="place-content-center"
-    v-for="contact in contacts"
-  >
+  <div id="contactsDiv" class="text-center" v-for="contact in contacts">
     <p class="font-bold">
-      {{ contact.name }} <button @click="delContact()">Ta bort</button>
-      <button @click="changeContact()">Ändra</button>
+      {{ contact.name }}
+    </p>
+    <p class="">
+      {{ contact.phone }}
     </p>
     <p>
-      {{ contact.phone }} <button @click="delContact()">Ta bort</button>
-      <button @click="changeContact()">Ändra</button>
+      {{ contact.email }}
     </p>
-    <p>
-      {{ contact.email }} <button @click="delContact()">Ta bort</button>
-      <button @click="changeContact()">Ändra</button>
-    </p>
+    <button
+      @click="delContact()"
+      class="rounded text-slate-200 bg-[#05768E] shadow-lg shadow-[#05768E]"
+    >
+      Ta bort
+    </button>
+    <button
+      @click="changeContact()"
+      class="rounded text-slate-200 bg-[#05768E] shadow-lg shadow-[#05768E] ml-2"
+    >
+      Ändra
+    </button>
   </div>
 </template>
 
