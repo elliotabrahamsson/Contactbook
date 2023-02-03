@@ -28,7 +28,9 @@
   </div>
 
   <div id="contactsDiv" class="" v-for="contact in contacts">
-    {{ contact.name }}
+    <p class="font-bold">{{ contact.name }}</p>
+    <p>{{ contact.phone }}</p>
+    <p>{{ contact.email }}</p>
   </div>
 </template>
 
