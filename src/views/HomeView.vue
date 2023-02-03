@@ -108,13 +108,30 @@ export default {
 
       const that = this;
       XHR.onload = function () {
-        contact.id = JSON.parse(this.responseText).id;
-        that.contacts.push(contact);
+        if (this.status == 201) {
+          contact.id = JSON.parse(this.responseText).id;
+          that.contacts.push(contact);
+        }
       };
 
       XHR.open("POST", "https://contactsserver.onrender.com/contact");
       XHR.setRequestHeader("Content-type", "application/json");
       XHR.send(JSON.stringify(contact));
+    },
+    delContact(contactId) {
+      const XHR = new XMLHttpRequest();
+
+      XHR.onload = function () {
+        if (this.status == 200) {
+          console.log(`Deleted contact with id: ${contactId} `);
+        }
+      };
+
+      XHR.open(
+        "DELETE",
+        `https://contactsserver.onrender.com/contact/${contactId}`
+      );
+      XHR.send();
     },
   },
 };
