@@ -4,8 +4,9 @@
 
     <input id="firstName" placeholder="Förnamn:" type="text" class=" " />
     <input id="lastName" placeholder="Efternamn:" type="text" class=" " />
+    <input id="phone" placeholder="Telefonnummer:" type="text" class=" " />
     <input type="text" id="email" placeholder="Email:" class=" " />
-    <button id="add" v-on:click="addContact()">Lägg till</button>
+    <button id="add" @click="addContact()">Lägg till</button>
     <button id="showAll" @click="getContact()">Visa alla kontakter</button>
   </div>
 
@@ -26,10 +27,9 @@ export default {
   methods: {
     getContact() {
       const XHR = new XMLHttpRequest();
-
-      XHR.onload = () => {
-        console.log(res.body);
-        this.contacts = res.body.contacts;
+      const view = this;
+      XHR.onload = function () {
+        view.contacts = JSON.parse(this.responseText).contacts;
       };
       XHR.open("GET", "https://contactsserver.onrender.com/contacts");
       XHR.send();
