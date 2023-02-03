@@ -27,10 +27,23 @@
     </button>
   </div>
 
-  <div id="contactsDiv" class="" v-for="contact in contacts">
-    <p class="font-bold">{{ contact.name }}</p>
-    <p>{{ contact.phone }}</p>
-    <p>{{ contact.email }}</p>
+  <div
+    id="contactsDiv"
+    class="place-content-center"
+    v-for="contact in contacts"
+  >
+    <p class="font-bold">
+      {{ contact.name }} <button @click="delContact()">Ta bort</button>
+      <button @click="changeContact()">Ändra</button>
+    </p>
+    <p>
+      {{ contact.phone }} <button @click="delContact()">Ta bort</button>
+      <button @click="changeContact()">Ändra</button>
+    </p>
+    <p>
+      {{ contact.email }} <button @click="delContact()">Ta bort</button>
+      <button @click="changeContact()">Ändra</button>
+    </p>
   </div>
 </template>
 
