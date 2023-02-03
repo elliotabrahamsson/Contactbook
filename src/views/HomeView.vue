@@ -57,7 +57,7 @@
       {{ contact.email }}
     </p>
     <button
-      @click="delContact()"
+      @click="delContact(contact._id)"
       class="rounded text-slate-200 bg-[#05768E] shadow-lg shadow-[#05768E]"
     >
       Ta bort
@@ -104,7 +104,7 @@ export default {
 
       const that = this;
       XHR.onload = function () {
-        if (this.status == 200) {
+        if (this.status == 201) {
           contact.id = JSON.parse(this.responseText).id;
           that.contacts.push(contact);
         }
@@ -114,18 +114,18 @@ export default {
       XHR.setRequestHeader("Content-type", "application/json");
       XHR.send(JSON.stringify(contact));
     },
-    delContact() {
+    delContact(contactId) {
       const XHR = new XMLHttpRequest();
 
       XHR.onload = function () {
         if (this.status == 200) {
-          console.log(`Deleted contact with id: ${contacts.contact.id} `);
+          console.log(`Deleted contact with id: ${contactId} `);
         }
       };
 
       XHR.open(
         "DELETE",
-        `https://contactsserver.onrender.com/contact/:${contacts.contact.id}`
+        `https://contactsserver.onrender.com/contact/${contactId}`
       );
       XHR.send();
     },
