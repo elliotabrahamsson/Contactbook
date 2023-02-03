@@ -8,14 +8,14 @@
     <button
       id="add"
       v-on:click="addContact()"
-      class="rounded, bg-cyan-500 shadow-lg shadow-cyan-500/50"
+      class="rounded text-slate-200 bg-[#05768E] shadow-lg shadow-[#05768E]"
     >
       Lägg till
     </button>
     <button
       id="showAll"
       @click="getContact()"
-      class="rounded, bg-cyan-500 shadow-lg shadow-cyan-500/50"
+      class="rounded text-slate-200 bg-[#05768E] shadow-lg shadow-[#05768E]"
     >
       Visa alla kontakter
     </button>
