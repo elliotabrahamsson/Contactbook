@@ -6,8 +6,20 @@
     <input id="lastName" placeholder="Efternamn:" type="text" class=" " />
     <input id="phone" placeholder="Telefonnummer:" type="text" class=" " />
     <input type="text" id="email" placeholder="Email:" class=" " />
-    <button id="add" @click="addContact()">Lägg till</button>
-    <button id="showAll" @click="getContact()">Visa alla kontakter</button>
+    <button
+      id="add"
+      @click="addContact()"
+      class="rounded, bg-cyan-500 shadow-lg shadow-cyan-500/50"
+    >
+      Lägg till
+    </button>
+    <button
+      id="showAll"
+      @click="getContact()"
+      class="rounded, bg-cyan-500 shadow-lg shadow-cyan-500/50"
+    >
+      Visa alla kontakter
+    </button>
   </div>
 
   <div id="contactsDiv" class="" v-for="contact in contacts">
