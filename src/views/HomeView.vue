@@ -61,7 +61,7 @@
       {{ contact.email }}
     </p>
     <button
-      @click="delContact()"
+      @click="delContact(contact._id)"
       class="rounded text-slate-200 bg-[#05768E] shadow-lg shadow-[#05768E] mt-2"
     >
       Ta bort
