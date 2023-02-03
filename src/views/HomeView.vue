@@ -67,7 +67,7 @@
       Ta bort
     </button>
     <button
-      @click="changeContact()"
+      @click="changeContact(contact._id)"
       class="rounded text-slate-200 bg-[#05768E] shadow-lg shadow-[#05768E] ml-2 mb-3"
     >
       Ändra
@@ -129,6 +129,17 @@ export default {
 
       XHR.open(
         "DELETE",
+        `https://contactsserver.onrender.com/contact/${contactId}`
+      );
+      XHR.send();
+    },
+    changeContact(contactId) {
+      const XHR = new XMLHttpRequest();
+
+      XHR.onload = function () {};
+
+      XHR.open(
+        "PATCH",
         `https://contactsserver.onrender.com/contact/${contactId}`
       );
       XHR.send();
