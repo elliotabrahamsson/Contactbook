@@ -1,12 +1,24 @@
 <template class="background">
-  <div class=" w-fit mx-auto grid grid-cols-1 gap-4">
-    <h1 class=" mx-1">Contactbook</h1>
+  <div class="w-fit mx-auto grid grid-cols-1 gap-4">
+    <h1 class="mx-1">Contactbook</h1>
 
-    <input id="firstName" placeholder="Förnamn:" type="text" class=" " />
-    <input id="lastName" placeholder="Efternamn:" type="text" class=" " />
-    <input type="text" id="email" placeholder="Email:" class=" " />
-    <button id="add" v-on:click="addContact()">Lägg till</button>
-    <button id="showAll" @click="getContact()">Visa alla kontakter</button>
+    <input id="firstName" placeholder="Förnamn:" type="text" class="rounded" />
+    <input id="lastName" placeholder="Efternamn:" type="text" class="rounded" />
+    <input type="text" id="email" placeholder="Email:" class="rounded" />
+    <button
+      id="add"
+      v-on:click="addContact()"
+      class="rounded, bg-cyan-500 shadow-lg shadow-cyan-500/50"
+    >
+      Lägg till
+    </button>
+    <button
+      id="showAll"
+      @click="getContact()"
+      class="rounded, bg-cyan-500 shadow-lg shadow-cyan-500/50"
+    >
+      Visa alla kontakter
+    </button>
   </div>
 
   <div id="contactsDiv" class=""></div>
