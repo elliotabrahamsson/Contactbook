@@ -1,84 +1,58 @@
-<template class="background">
+<template>
   <div class="w-fit mx-auto grid grid-cols-1 gap-4">
-    <h1 class="mx-1">Contactbook</h1>
+    <h1 class="mx-1 text-white text-7xl text-center">Kontaktbok</h1>
 
     <input
-      id="firstName"
-      placeholder="Förnamn:"
+      placeholder="Förnamn"
       type="text"
       v-model="firstname"
-      class="rounded"
+      class="rounded p-1"
     />
     <input
-      id="lastName"
-      placeholder="Efternamn:"
+      placeholder="Efternamn"
       type="text"
       v-model="lastname"
-      class="rounded"
+      class="rounded p-1"
     />
     <input
-      id="phone"
-      placeholder="Telefonnummer:"
+      placeholder="Telefonnummer"
+      type="tel"
       v-model="number"
-      type="text"
-      class="rounded"
+      class="rounded p-1"
     />
     <input
-      type="text"
-      id="email"
-      placeholder="Email:"
+      placeholder="Email"
+      type="email"
       v-model="email"
-      class="rounded"
+      class="rounded p-1"
     />
-    <button
-      id="add"
-      @click="addContact()"
-      class="rounded text-slate-200 bg-[#05768E] shadow-lg shadow-[#05768E]"
-    >
-      Lägg till
-    </button>
-    <button
-      id="showAll"
-      @click="getContact()"
-      class="rounded text-slate-200 bg-[#05768E] shadow-lg shadow-[#05768E] mb-3"
-    >
-      Visa alla kontakter
-    </button>
-  </div>
 
-  <div
-    id="contactsDiv"
-    class="text-center rounded border-2 border-[#05768E] w-96 ml-auto mr-auto mt-2 mb-2"
-    v-for="contact in contacts"
-  >
-    <p class="font-bold mt-2">
-      {{ contact.name }}
-    </p>
-    <p class="mt-2">
-      {{ contact.phone }}
-    </p>
-    <p class="mt-2">
-      {{ contact.email }}
-    </p>
-    <button
-      @click="delContact(contact._id)"
-      class="rounded text-slate-200 bg-[#05768E] shadow-lg shadow-[#05768E] mt-2"
+    <ContactButton @click="addContact()" buttonText="Skapa kontakt" />
+    <ContactButton
+      @click="getContact()"
+      class="rounded text-white bg-oceanBlue"
+      buttonText="Visa alla kontakter"
     >
-      Ta bort
-    </button>
-    <button
-      @click="changeContact(contact._id)"
-      class="rounded text-slate-200 bg-[#05768E] shadow-lg shadow-[#05768E] ml-2 mb-3"
-    >
-      Ändra
-    </button>
+    </ContactButton>
+
+    <ContactComponent
+      :contact="contact"
+      :deleteFunction="removeContact"
+      v-for="contact in contacts"
+    />
   </div>
 </template>
 
-<script setup></script>
-
 <script>
+import ContactComponent from "../components/ContactComponent.vue";
+import ContactButton from "../components/ContactButton.vue";
+import axios from "axios";
+
 export default {
+  components: {
+    ContactComponent,
+    ContactButton,
+  },
   data() {
     return {
       contacts: [],
@@ -90,60 +64,61 @@ export default {
   },
   methods: {
     getContact() {
-      const XHR = new XMLHttpRequest();
       const view = this;
-      XHR.onload = function () {
-        view.contacts = JSON.parse(this.responseText).contacts;
-      };
-      XHR.open("GET", "https://contactsserver.onrender.com/contacts");
-      XHR.send();
+      axios
+        .get("https://contactsserver.onrender.com/contact")
+        .then((res) => res.data.contacts)
+        .then((contacts) => (view.contacts = contacts));
     },
+    ValidateEmail() {
+      if (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(this.email)) {
+        return true;
+      }
+      alert("You have entered an invalid email address!");
+      return false;
+    },
+    ValidateNumber() {
+      if (
+        /^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/.test(
+          this.number
+        )
+      ) {
+        return true;
+      }
+      alert("You have entered an invalid phone number!");
+      return false;
+    },
+
     addContact() {
-      const XHR = new XMLHttpRequest();
+      this.ValidateEmail();
+      const view = this;
       let contact = {
         name: `${this.firstname} ${this.lastname}`,
         phone: this.number,
         email: this.email,
       };
 
-      const that = this;
-      XHR.onload = function () {
-        if (this.status == 201) {
-          contact.id = JSON.parse(this.responseText).id;
-          that.contacts.push(contact);
-        }
-      };
-
-      XHR.open("POST", "https://contactsserver.onrender.com/contact");
-      XHR.setRequestHeader("Content-type", "application/json");
-      XHR.send(JSON.stringify(contact));
+      axios
+        .post("https://contactsserver.onrender.com/contact", contact)
+        .then((res) => res.data.id)
+        .then((id) => {
+          contact.id = id;
+          view.contacts.push(contact);
+        })
+        .catch((err) => {
+          const message = err?.response?.data?.message;
+          if (!message) return;
+          alert(err.response.data.message);
+        });
     },
-    delContact(contactId) {
-      const XHR = new XMLHttpRequest();
-
-      XHR.onload = function () {
-        if (this.status == 200) {
-          console.log(`Deleted contact with id: ${contactId} `);
-        }
-      };
-
-      XHR.open(
-        "DELETE",
-        `https://contactsserver.onrender.com/contact/${contactId}`
-      );
-      XHR.send();
+    removeContact(contact) {
+      const index = this.contacts.indexOf(contact);
+      if (index == -1) return;
+      this.contacts.splice(index, 1);
     },
-    changeContact(contactId) {
-      const XHR = new XMLHttpRequest();
-
-      XHR.onload = function () {};
-
-      XHR.open(
-        "PATCH",
-        `https://contactsserver.onrender.com/contact/${contactId}`
-      );
-      XHR.send();
-    },
+  },
+  mounted() {
+    this.getContact();
   },
 };
 </script>
