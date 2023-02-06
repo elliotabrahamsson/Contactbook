@@ -1,7 +1,7 @@
 <template>
   <button
     type="button"
-    class="rounded text-white bg-oceanBlue shadow-lg shadow-oceanBlue ml-2 mb-3"
+    class="rounded text-white bg-oceanBlue hover:bg-hoverBlue p-2 mx-2 my-2"
   >
     {{ buttonText }}
   </button>
