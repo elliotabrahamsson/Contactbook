@@ -4,21 +4,21 @@
 
     <input
       id="firstName"
-      placeholder="Förnamn:"
+      placeholder="Förnamn"
       type="text"
       v-model="firstname"
       class="rounded"
     />
     <input
       id="lastName"
-      placeholder="Efternamn:"
+      placeholder="Efternamn"
       type="text"
       v-model="lastname"
       class="rounded"
     />
     <input
       id="phone"
-      placeholder="Telefonnummer:"
+      placeholder="Telefonnummer"
       v-model="number"
       type="tel"
       class="rounded"
@@ -26,33 +26,35 @@
     <input
       type="text"
       id="email"
-      placeholder="Email:"
+      placeholder="Email"
       v-model="email"
       class="rounded"
     />
 
     <div
-      class="text-center rounded border-2 border-[#05768E] w-96 ml-auto mr-auto mt-2 mb-2"
+      class="text-center rounded border-2 border-oceanBlue p-4"
       v-for="contact in contacts"
     >
       <ContactComponent :contact="contact" />
     </div>
-    <button
+    <ContactButton
       @click="getContact()"
-      class="rounded text-slate-200 bg-[#05768E] shadow-lg shadow-[#05768E] mb-3"
+      class="rounded text-white bg-oceanBlue shadow-lg shadow-OceanBlue mb-3"
+      buttonText="Visa alla kontakter"
     >
-      Visa alla kontakter
-    </button>
+    </ContactButton>
   </div>
 </template>
 
 <script>
 import ContactComponent from "../components/ContactComponent.vue";
+import ContactButton from "../components/ContactButton.vue";
 import axios from "axios";
 
 export default {
   components: {
     ContactComponent,
+    ContactButton,
   },
   data() {
     return {
