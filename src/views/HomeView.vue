@@ -1,6 +1,6 @@
 <template>
   <div class="w-fit mx-auto grid grid-cols-1 gap-4">
-    <h1 class="mx-1">Contactbook</h1>
+    <h1 class="mx-1 text-[#ffffff] text-7xl text-center">Kontaktbok</h1>
 
     <input
       id="firstName"
