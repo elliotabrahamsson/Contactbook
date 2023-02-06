@@ -14,12 +14,14 @@ export default {
 </script>
 
 <template>
-  <ContactInfo
-    :name="contact.name"
-    :phone="contact.phone"
-    :email="contact.email"
-  />
+  <div class="text-center bg-white rounded-lg">
+    <ContactInfo
+      :name="contact.name"
+      :phone="contact.phone"
+      :email="contact.email"
+    />
 
-  <ContactButton @click="delContact(contact.id)" buttonText="Ta bort" />
-  <ContactButton @click="changeContact(contact.id)" buttonText="Ändra" />
+    <ContactButton @click="delContact(contact.id)" buttonText="Ta bort" />
+    <ContactButton @click="changeContact(contact.id)" buttonText="Ändra" />
+  </div>
 </template>

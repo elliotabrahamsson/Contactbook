@@ -31,12 +31,8 @@
       class="rounded"
     />
 
-    <div
-      class="text-center rounded border-2 border-oceanBlue p-4"
-      v-for="contact in contacts"
-    >
-      <ContactComponent :contact="contact" />
-    </div>
+    <ContactComponent :contact="contact" v-for="contact in contacts" />
+
     <ContactButton
       @click="getContact()"
       class="rounded text-white bg-oceanBlue shadow-lg shadow-OceanBlue mb-3"
