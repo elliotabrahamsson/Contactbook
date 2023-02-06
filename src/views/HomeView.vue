@@ -39,7 +39,11 @@
     >
     </ContactButton>
 
-    <ContactComponent :contact="contact" v-for="contact in contacts" />
+    <ContactComponent
+      :contact="contact"
+      :deleteFunction="removeContact"
+      v-for="contact in contacts"
+    />
   </div>
 </template>
 
@@ -86,15 +90,10 @@ export default {
           view.contacts.push(contact);
         });
     },
-    delContact(contactId) {
-      axios
-        .delete(`https://contactsserver.onrender.com/contact/${contactId}`)
-        .then(() => {
-          console.log(`Deleted contact with id: ${contactId}`);
-        });
-    },
-    changeContact(contactId) {
-      axios.patch(`https://contactsserver.onrender.com/contact/${contactId}`);
+    removeContact(contact) {
+      const index = this.contacts.indexOf(contact);
+      if (index == -1) return;
+      this.contacts.splice(index, 1);
     },
   },
 };
