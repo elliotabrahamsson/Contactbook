@@ -1,4 +1,4 @@
-<template class="background">
+<template>
   <div class="w-fit mx-auto grid grid-cols-1 gap-4">
     <h1 class="mx-1">Contactbook</h1>
 
@@ -30,13 +30,9 @@
       v-model="email"
       class="rounded"
     />
-    <button
-      id="add"
-      @click="addContact()"
-      class="rounded text-slate-200 bg-[#05768E] shadow-lg shadow-[#05768E]"
-    >
-      Lägg till
-    </button>
+
+    <ContactComponent />
+
     <button
       id="showAll"
       @click="getContact()"
@@ -45,40 +41,15 @@
       Visa alla kontakter
     </button>
   </div>
-
-  <div
-    id="contactsDiv"
-    class="text-center rounded border-2 border-[#05768E] w-96 ml-auto mr-auto mt-2 mb-2"
-    v-for="contact in contacts"
-  >
-    <p class="font-bold mt-2">
-      {{ contact.name }}
-    </p>
-    <p class="mt-2">
-      {{ contact.phone }}
-    </p>
-    <p class="mt-2">
-      {{ contact.email }}
-    </p>
-    <button
-      @click="delContact(contact._id)"
-      class="rounded text-slate-200 bg-[#05768E] shadow-lg shadow-[#05768E] mt-2"
-    >
-      Ta bort
-    </button>
-    <button
-      @click="changeContact(contact._id)"
-      class="rounded text-slate-200 bg-[#05768E] shadow-lg shadow-[#05768E] ml-2 mb-3"
-    >
-      Ändra
-    </button>
-  </div>
 </template>
 
-<script setup></script>
-
 <script>
+import ContactComponent from "@/components/ContactComponent.vue";
+
 export default {
+  components: {
+    ContactComponent,
+  },
   data() {
     return {
       contacts: [],
