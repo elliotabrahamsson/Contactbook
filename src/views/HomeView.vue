@@ -96,5 +96,8 @@ export default {
       this.contacts.splice(index, 1);
     },
   },
+  mounted() {
+    this.getContact();
+  },
 };
 </script>
