@@ -1,16 +1,17 @@
 <script>
-import ContactButton from "@/components/ContactButton.vue";
-import ContactInfo from "@/components/ContactInfo.vue";
+import ContactButton from "../components/ContactButton.vue";
+import ContactInfo from "../components/ContactInfo.vue";
+
+export default {
+  props: {
+    contact: Object,
+  },
+};
 </script>
 
 <template>
-  <div
-    class="text-center rounded border-2 border-[#05768E] w-96 ml-auto mr-auto mt-2 mb-2"
-    v-for="contact in contacts"
-  >
-    <ContactInfo />
+  <ContactInfo :name="contact" />
 
-    <ContactButton @click="delContact(contact._id)"> Ta bort </ContactButton>
-    <ContactButton @click="changeContact(contact._id)"> Ändra </ContactButton>
-  </div>
+  <ContactButton @click="delContact(contact._id)" buttonText="Ta bort" />
+  <ContactButton @click="changeContact(contact._id)" buttonText="Ändra" />
 </template>

@@ -31,10 +31,13 @@
       class="rounded"
     />
 
-    <ContactComponent />
-
+    <div
+      class="text-center rounded border-2 border-[#05768E] w-96 ml-auto mr-auto mt-2 mb-2"
+      v-for="contact in contacts"
+    >
+      <ContactComponent :contact="contact" />
+    </div>
     <button
-      id="showAll"
       @click="getContact()"
       class="rounded text-slate-200 bg-[#05768E] shadow-lg shadow-[#05768E] mb-3"
     >
@@ -44,7 +47,7 @@
 </template>
 
 <script>
-import ContactComponent from "@/components/ContactComponent.vue";
+import ContactComponent from "../components/ContactComponent.vue";
 
 export default {
   components: {
