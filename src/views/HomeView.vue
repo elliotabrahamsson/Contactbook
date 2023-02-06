@@ -1,6 +1,6 @@
 <template>
   <div class="w-fit mx-auto grid grid-cols-1 gap-4">
-    <h1 class="mx-1 text-[#ffffff] text-7xl text-center">Kontaktbok</h1>
+    <h1 class="mx-1 text-white text-7xl text-center">Kontaktbok</h1>
 
     <input
       id="firstName"
@@ -31,14 +31,15 @@
       class="rounded"
     />
 
-    <ContactComponent :contact="contact" v-for="contact in contacts" />
-
     <ContactButton
       @click="getContact()"
-      class="rounded text-white bg-oceanBlue shadow-lg shadow-OceanBlue mb-3"
+      class="rounded text-white bg-oceanBlue shadow-lg shadow-OceanBlue"
       buttonText="Visa alla kontakter"
     >
     </ContactButton>
+    <ContactButton @click="addContact()" buttonText="Skapa kontakt" />
+
+    <ContactComponent :contact="contact" v-for="contact in contacts" />
   </div>
 </template>
 
