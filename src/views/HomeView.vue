@@ -45,6 +45,7 @@
 
 <script>
 import ContactComponent from "@/components/ContactComponent.vue";
+import axios from "axios";
 
 export default {
   components: {
@@ -61,59 +62,37 @@ export default {
   },
   methods: {
     getContact() {
-      const XHR = new XMLHttpRequest();
       const view = this;
-      XHR.onload = function () {
-        view.contacts = JSON.parse(this.responseText).contacts;
-      };
-      XHR.open("GET", "https://contactsserver.onrender.com/contacts");
-      XHR.send();
+      axios
+        .get("https://contactsserver.onrender.com/contacts")
+        .then((res) => res.data.contacts)
+        .then((contacts) => (view.contacts = contacts));
     },
     addContact() {
-      const XHR = new XMLHttpRequest();
+      const view = this;
       let contact = {
         name: `${this.firstname} ${this.lastname}`,
         phone: this.number,
         email: this.email,
       };
 
-      const that = this;
-      XHR.onload = function () {
-        if (this.status == 201) {
-          contact.id = JSON.parse(this.responseText).id;
-          that.contacts.push(contact);
-        }
-      };
-
-      XHR.open("POST", "https://contactsserver.onrender.com/contact");
-      XHR.setRequestHeader("Content-type", "application/json");
-      XHR.send(JSON.stringify(contact));
+      axios
+        .post("https://contactsserver.onrender.com/contact")
+        .then((res) => res.data.id)
+        .then((id) => {
+          contact.id = id;
+          view.contacts.push(contact);
+        });
     },
     delContact(contactId) {
-      const XHR = new XMLHttpRequest();
-
-      XHR.onload = function () {
-        if (this.status == 200) {
-          console.log(`Deleted contact with id: ${contactId} `);
-        }
-      };
-
-      XHR.open(
-        "DELETE",
-        `https://contactsserver.onrender.com/contact/${contactId}`
-      );
-      XHR.send();
+      axios
+        .delete(`https://contactsserver.onrender.com/contact/${contactId}`)
+        .then(() => {
+          console.log(`Deleted contact with id: ${contactId}`);
+        });
     },
     changeContact(contactId) {
-      const XHR = new XMLHttpRequest();
-
-      XHR.onload = function () {};
-
-      XHR.open(
-        "PATCH",
-        `https://contactsserver.onrender.com/contact/${contactId}`
-      );
-      XHR.send();
+      axios.patch(`https://contactsserver.onrender.com/contact/${contactId}`);
     },
   },
 };
