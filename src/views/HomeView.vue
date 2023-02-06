@@ -99,11 +99,16 @@ export default {
       };
 
       axios
-        .post("https://contactsserver.onrender.com/contact")
+        .post("https://contactsserver.onrender.com/contact", contact)
         .then((res) => res.data.id)
         .then((id) => {
           contact.id = id;
           view.contacts.push(contact);
+        })
+        .catch((err) => {
+          const message = err?.response?.data?.message;
+          if (!message) return;
+          alert(err.response.data.message);
         });
     },
     removeContact(contact) {
