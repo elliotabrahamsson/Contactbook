@@ -4,6 +4,8 @@ import AppFooter from "./components/AppFooter.vue";
 </script>
 
 <template>
-  <HomeView />
+  <main class="flex-grow">
+    <HomeView />
+  </main>
   <AppFooter />
 </template>
