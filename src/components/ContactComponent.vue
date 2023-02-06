@@ -12,6 +12,6 @@ export default {
 <template>
   <ContactInfo :name="contact" />
 
-  <ContactButton @click="delContact(contact._id)" buttonText="Ta bort" />
-  <ContactButton @click="changeContact(contact._id)" buttonText="Ändra" />
+  <ContactButton @click="delContact(contact.id)" buttonText="Ta bort" />
+  <ContactButton @click="changeContact(contact.id)" buttonText="Ändra" />
 </template>
