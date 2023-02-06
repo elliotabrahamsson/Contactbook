@@ -29,9 +29,15 @@ export default {
   },
   methods: {
     deleteContact() {
-      axios.delete(
-        `https://contactsserver.onrender.com/contact/${this.contact.id}`
-      );
+      axios
+        .delete(
+          `https://contactsserver.onrender.com/contact/${this.contact.id}`
+        )
+        .catch((err) => {
+          const message = err?.response?.data?.message;
+          if (!message) return;
+          alert(err.response.data.message);
+        });
 
       this.deleteFunction(this.contact);
     },
@@ -47,10 +53,16 @@ export default {
       if (Object.keys(change).length == 0) return;
       Object.assign(this.contact, change);
 
-      axios.patch(
-        `https://contactsserver.onrender.com/contact/${this.contact.id}`,
-        change
-      );
+      axios
+        .patch(
+          `https://contactsserver.onrender.com/contact/${this.contact.id}`,
+          change
+        )
+        .catch((err) => {
+          const message = err?.response?.data?.message;
+          if (!message) return;
+          alert(err.response.data.message);
+        });
     },
     edit() {
       this.isEditing = true;

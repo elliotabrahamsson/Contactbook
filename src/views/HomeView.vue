@@ -84,6 +84,11 @@ export default {
         .then((id) => {
           contact.id = id;
           view.contacts.push(contact);
+        })
+        .catch((err) => {
+          const message = err?.response?.data?.message;
+          if (!message) return;
+          alert(err.response.data.message);
         });
     },
     removeContact(contact) {
