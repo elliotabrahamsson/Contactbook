@@ -37,12 +37,8 @@
     >
       <ContactComponent :contact="contact" />
     </div>
-    <ContactButton
-      @click="getContact()"
-      class="rounded text-white bg-oceanBlue shadow-lg shadow-OceanBlue mb-3"
-      buttonText="Visa alla kontakter"
-    >
-    </ContactButton>
+    <ContactButton @click="addContact()" buttonText="Skapa kontakt" />
+    <ContactButton @click="getContact()" buttonText="Visa alla kontakter" />
   </div>
 </template>
 
