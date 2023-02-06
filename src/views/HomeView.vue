@@ -64,7 +64,7 @@ export default {
     getContact() {
       const view = this;
       axios
-        .get("https://contactsserver.onrender.com/contacts")
+        .get("https://contactsserver.onrender.com/contact")
         .then((res) => res.data.contacts)
         .then((contacts) => (view.contacts = contacts));
     },
