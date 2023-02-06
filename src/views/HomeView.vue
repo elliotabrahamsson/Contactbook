@@ -31,13 +31,13 @@
       class="rounded"
     />
 
+    <ContactButton @click="addContact()" buttonText="Skapa kontakt" />
     <ContactButton
       @click="getContact()"
       class="rounded text-white bg-oceanBlue shadow-lg shadow-OceanBlue"
       buttonText="Visa alla kontakter"
     >
     </ContactButton>
-    <ContactButton @click="addContact()" buttonText="Skapa kontakt" />
 
     <ContactComponent :contact="contact" v-for="contact in contacts" />
   </div>
