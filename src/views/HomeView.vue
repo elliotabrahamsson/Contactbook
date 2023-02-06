@@ -20,7 +20,7 @@
       id="phone"
       placeholder="Telefonnummer:"
       v-model="number"
-      type="text"
+      type="tel"
       class="rounded"
     />
     <input
