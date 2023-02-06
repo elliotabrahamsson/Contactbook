@@ -70,7 +70,27 @@ export default {
         .then((res) => res.data.contacts)
         .then((contacts) => (view.contacts = contacts));
     },
+    ValidateEmail() {
+      if (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(this.email)) {
+        return true;
+      }
+      alert("You have entered an invalid email address!");
+      return false;
+    },
+    ValidateNumber() {
+      if (
+        /^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/.test(
+          this.number
+        )
+      ) {
+        return true;
+      }
+      alert("You have entered an invalid phone number!");
+      return false;
+    },
+
     addContact() {
+      this.ValidateEmail();
       const view = this;
       let contact = {
         name: `${this.firstname} ${this.lastname}`,
