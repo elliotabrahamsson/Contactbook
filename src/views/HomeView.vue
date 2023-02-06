@@ -79,7 +79,7 @@ export default {
       };
 
       axios
-        .post("https://contactsserver.onrender.com/contact")
+        .post("https://contactsserver.onrender.com/contact", contact)
         .then((res) => res.data.id)
         .then((id) => {
           contact.id = id;
