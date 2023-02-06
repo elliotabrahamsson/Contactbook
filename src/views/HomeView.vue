@@ -3,38 +3,34 @@
     <h1 class="mx-1 text-white text-7xl text-center">Kontaktbok</h1>
 
     <input
-      id="firstName"
       placeholder="Förnamn"
       type="text"
       v-model="firstname"
-      class="rounded"
+      class="rounded p-1"
     />
     <input
-      id="lastName"
       placeholder="Efternamn"
       type="text"
       v-model="lastname"
-      class="rounded"
+      class="rounded p-1"
     />
     <input
-      id="phone"
       placeholder="Telefonnummer"
-      v-model="number"
       type="tel"
-      class="rounded"
+      v-model="number"
+      class="rounded p-1"
     />
     <input
-      type="text"
-      id="email"
       placeholder="Email"
+      type="email"
       v-model="email"
-      class="rounded"
+      class="rounded p-1"
     />
 
     <ContactButton @click="addContact()" buttonText="Skapa kontakt" />
     <ContactButton
       @click="getContact()"
-      class="rounded text-white bg-oceanBlue shadow-lg shadow-OceanBlue"
+      class="rounded text-white bg-oceanBlue"
       buttonText="Visa alla kontakter"
     >
     </ContactButton>
