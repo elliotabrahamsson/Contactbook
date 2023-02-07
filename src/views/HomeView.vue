@@ -98,6 +98,10 @@ export default {
         email: this.email,
       };
 
+      this.number = "";
+      this.email = "";
+      this.firstname = "";
+      this.lastname = "";
       axios
         .post("https://contactsserver.onrender.com/contact", contact)
         .then((res) => res.data.id)
